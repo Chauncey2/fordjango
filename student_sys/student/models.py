@@ -19,7 +19,11 @@ class Student(models.Model):
     email = models.EmailField(verbose_name="电子邮件")
     phone = models.CharField(max_length=128, verbose_name="电话")
     status = models.IntegerField(choices=STATUS_ITEMS, verbose_name="审核状态")
-    create_time = models.DateTimeField(max_length=128, verbose_name="创建时间",auto_now=True)
+    create_time = models.DateTimeField(max_length=128, verbose_name="创建时间", auto_now=True)
+
+    @classmethod
+    def get_all(cls):
+        return cls.objects.all()
 
     def __str__(self):
         return f"<Student:{self.name}>"

@@ -7,7 +7,8 @@ from .forms import StudentForm
 
 # Create your views here.
 def index(request):
-    student = Student.objects.all()
+    # student = Student.objects.all()
+    student = Student.get_all()
     if request.method == "POST":
         form = StudentForm(request.POST)
         if form.is_valid():
