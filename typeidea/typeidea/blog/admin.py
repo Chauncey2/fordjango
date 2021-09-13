@@ -24,6 +24,7 @@ class CategoryAdmin(admin.ModelAdmin):
         return super(CategoryAdmin, self).save_model(request, obj, form, change)
 
 
+
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
     list_display = ('name', 'status', 'created_time')
