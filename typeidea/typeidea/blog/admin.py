@@ -1,7 +1,8 @@
 from django.contrib import admin
-from .models import Post, Category, Tag
 from django.urls import reverse
 from django.utils.html import format_html
+from .models import Post, Category, Tag
+from .adminform import PostAdminForm
 
 
 # Register your models here.
@@ -51,6 +52,7 @@ class CategoryOwnerFilter(admin.SimpleListFilter):
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
+    form = PostAdminForm
     list_display = [
         'title', 'category', 'status',
         'created_time', 'operator'
@@ -63,6 +65,10 @@ class PostAdmin(admin.ModelAdmin):
 
     # 编辑页面
     save_on_top = True
+
+    # 只是owner字段不展示，因为Post类中并没有该字段，该字段是外键 category中的
+    # 这里缺省默认使用单前用户
+    exclude = ('owner',)
 
     fields = [
         ('category', 'title'),
